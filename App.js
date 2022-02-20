@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -16,29 +16,28 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import { useFetchRecipes } from './src/api/recipes/useFetchRecipes';
 
-const Section = () => {
+const Section = (props) => {
   return (
     <View>
-      <Text>OUAIS ENCULAY</Text>
+      <Text>{props.text}</Text>
     </View>
   );
 };
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const {getAllRecipes} = useFetchRecipes()
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  useEffect(() => {
+    console.log("LOL")
 
+    getAllRecipes()
+  }, [])
   return (
-    <SafeAreaView style={backgroundStyle}>
-     <Section></Section>
-    </SafeAreaView>
+    <>
+     <Section text="gergreq"></Section>
+    </>
   );
 };
 
